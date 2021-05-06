@@ -66,11 +66,11 @@ class GetAllPuppiesTest(TestCase):
     def test_post_one_incomplete_book(self):
 
         data = {
-            "titulo": "",
-            "isbm": "",
-            "autor": "",
-            "editora": "V",
-            "edicao": "",
+            "titulo": "As Valquírias",
+            "isbm": "12503602",
+            "autor": "Paulo Coelo",
+            "editora": "Paulo Coelho",
+            "edicao": "2",
             "num_paginas": 1500,
             "descricao": ""
         }

@@ -10,6 +10,7 @@ class LivrosViewSet(viewsets.ModelViewSet):
     queryset = Livro.objects.all()
     serializer_class = LivroSerializer
 
+    # reimplementação do método create para que as validações do serializer passem a ser consideradas
     def create(self, request):
         #Set your serializer
         serializer = LivroSerializer(data=request.data)
