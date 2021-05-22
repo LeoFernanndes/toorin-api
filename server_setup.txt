@@ -1,0 +1,7 @@
+sudo apt-get update
+sudo apt-get  -y upgrade 
+sudo apt-get install -y python3-venv
+sudo apt-get install -y nginx
+sudo service nginx start
+sudo mkdir /etc/nginx/sites-available
+sudo mkdir /etc/nginx/sites-enabled
