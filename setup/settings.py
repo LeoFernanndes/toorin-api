@@ -27,6 +27,14 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
+CORS_ALLOW_ALL_ORIGINS = False
+
+# create a front end app in another host to test cors
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost",
+    # "http://177.58.233.1"
+]
+
 
 # Application definition
 
@@ -37,11 +45,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
-    'livros'
+    'corsheaders',
+
+    'livros',
 ]
 
 MIDDLEWARE = [
+
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
