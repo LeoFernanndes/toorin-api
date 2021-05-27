@@ -1,0 +1,63 @@
+version: '3'
+
+services:
+
+    djangoapp1: 
+        build:
+            context: .
+            dockerfile: app.dockerfile
+        volumes:
+            - .:/usr/src/app
+            - ./static:/usr/src/app/static
+            - ./media:/usr/src/app/media
+        ports:
+            - 8000
+        networks:
+            - nginx_network
+
+    djangoapp2: 
+        build:
+            context: .
+            dockerfile: app.dockerfile
+        volumes:
+            - .:/usr/src/app
+            - ./static:/usr/src/app/static
+            - ./media:/usr/src/app/media
+        ports:
+            - 8000
+        networks:
+            - nginx_network
+
+    djangoapp3: 
+        build:
+            context: .
+            dockerfile: app.dockerfile
+        volumes:
+            - .:/usr/src/app
+            - ./static:/usr/src/app/static
+            - ./media:/usr/src/app/media
+        ports:
+            - 8000
+        networks:
+            - nginx_network
+
+    nginx:
+        image: nginx:1.13
+        ports:
+            - 8000:80
+        volumes:
+            - ./config/nginx/conf.d:/etc/nginx/conf.d
+            - ./static:/usr/src/app/static  
+            - ./media:/usr/src/app/media
+        depends_on:  
+            - djangoapp1
+            - djangoapp2
+            - djangoapp3
+        networks:
+            - nginx_network
+
+    
+networks:  # <-- and here
+     nginx_network:
+        driver: bridge
+
