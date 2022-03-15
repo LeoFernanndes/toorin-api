@@ -31,7 +31,7 @@ CORS_ALLOW_ALL_ORIGINS = False
 
 # create a front end app in another host to test cors
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost",
+    "http://localhost:3000",
     # "http://177.58.233.1"
 ]
 
