@@ -1,0 +1,20 @@
+[
+  {
+    "model": "pessoas.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$260000$xCHglB8dbpLYM4jKZPvpE9$8KC/GIj9wOqxABrj3OlblZqtiJ3YjKHvlqAXuJmvu2s=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "username",
+      "first_name": "first name",
+      "last_name": "last name",
+      "email": "email@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-07-03T01:26:09.641Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]
