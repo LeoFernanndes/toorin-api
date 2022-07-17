@@ -1,4 +1,6 @@
 from rest_framework import viewsets, generics
+from rest_framework.permissions import AllowAny
+
 from livros.models import Livro
 from livros.serializer import LivroSerializer
 from rest_framework.response import Response
@@ -9,6 +11,7 @@ class LivrosViewSet(viewsets.ModelViewSet):
     """Exibindo todos os livros"""
     queryset = Livro.objects.all()
     serializer_class = LivroSerializer
+    # permission_classes = [AllowAny]
 
     # reimplementação do método create para que as validações do serializer passem a ser consideradas
     def create(self, request):
