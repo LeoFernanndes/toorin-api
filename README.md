@@ -7,3 +7,10 @@ Api para crud de livros implementada em django rest framework
 4. Faça as migrações com os comandos makemigrations e migrate do django
 5. Execute os testes com o comando test do django
 6. Suba o ambiente de desenvolvimento com o comando runserver do django
+
+## Sample .env
+DB_NAME=toorin\
+DB_USER=admin\
+DB_PASSWORD=password\
+DB_HOST=127.0.0.1\
+DB_PORT=5432
