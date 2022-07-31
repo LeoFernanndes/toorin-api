@@ -15,23 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.views import TokenRefreshView
 
-from livros.views import LivrosViewSet
-from rest_framework import routers
-
-from pessoas.viewsets import UserViewSet
-
-router = routers.DefaultRouter()
-router.register('livros', LivrosViewSet, basename='Livros')
-router.register('pessoas', UserViewSet, basename='Pessoas')
-
-
+from pessoas.views import CustomTokenObtainPairView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls) ),
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('livros/', include("livros.routes"), name='livros' ),
+    path('pessoas/', include("pessoas.routes"), name='pessoas' ),
+    path('token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

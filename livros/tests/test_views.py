@@ -4,7 +4,7 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from ..models import Livro
 from ..serializer import LivroSerializer
-from ..views import LivrosViewSet
+from ..viewsets import LivrosViewSet
 from rest_framework.test import APIRequestFactory, RequestsClient
 
 # initialize the APIClient app

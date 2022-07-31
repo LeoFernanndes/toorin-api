@@ -1,0 +1,1 @@
+[{"model": "pessoas.tipoacesso", "pk": 1, "fields": {"tipo_acesso": "super_admin"}}, {"model": "pessoas.tipoacesso", "pk": 2, "fields": {"tipo_acesso": "admin"}}, {"model": "pessoas.tipoacesso", "pk": 3, "fields": {"tipo_acesso": "usuario"}}]
