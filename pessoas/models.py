@@ -33,7 +33,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
-    # access_type = models.ForeignKey(AccessType, on_delete=models.PROTECT)
+    access_type = models.ForeignKey(TipoAcesso, on_delete=models.PROTECT, default=3)
     objects = UserManager()
 
 
