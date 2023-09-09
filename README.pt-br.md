@@ -1,4 +1,7 @@
-# toorin_api
+# Toorin API
+
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/LeoFernanndes/toorin-api/blob/develop/README.pt-br.md)
+
 Api para gestão de uma livraria implementada em django rest framework
 
 ## Versão do python
@@ -28,3 +31,6 @@ Crie um arquivo .env dentro do repositório clonado
     DB_HOST=127.0.0.1\
     DB_PORT=5432
 
+## Usuário admin 
+username: username\
+password: password123

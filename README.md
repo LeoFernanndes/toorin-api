@@ -1,4 +1,7 @@
-# toorin_api
+# Toorin API
+
+[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](https://github.com/LeoFernanndes/toorin-api/blob/develop/README.pt-br.md)
+
 Bookstore management api implemented with django rest framework
 
 ## Python version
@@ -29,5 +32,5 @@ Create a .env file inside clone repository
     DB_PORT=5432
 
 ## Admin user
-username: username
+username: username\
 password: password123
