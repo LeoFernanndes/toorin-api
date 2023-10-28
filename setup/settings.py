@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt',
+    'drf_yasg',
 
     'livros',
     'pessoas',
@@ -232,5 +233,12 @@ LOGGING = {
     },
 }
 
-
-
+SWAGGER_SETTINGS = {
+   'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    }
+}
