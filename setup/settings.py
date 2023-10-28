@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-hfuqat8ky24fq7ip#=)6sq=eg#bnvdz$0yc6bg_bd#c)m5i8w-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', True)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost']
 
 CORS_ALLOW_ALL_ORIGINS = False
 
@@ -159,3 +159,78 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = "pessoas.User"
+
+
+disallowed_hosts_to_be_filtered = [
+    'localhost'
+]
+
+def filter_disallowed_host_exception(record):
+    from random import random
+    if record.name == 'django.security.DisallowedHost':
+        if any([disallowed_host in record.request.headers.get('host') for disallowed_host in disallowed_hosts_to_be_filtered]):
+            rand = random()
+            print(rand)
+            if rand < 0.99:
+                print(rand)
+                return False
+    return True
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'root': {
+        'level': 'WARNING',
+        # 'handlers': ['sentry', ],
+        'handlers': ['console', ],
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s '
+                      '%(process)d %(thread)d %(message)s'
+        },
+    },
+    'filters': {
+        'filter_disallowed_host_exception': {
+            '()': 'django.utils.log.CallbackFilter',
+            'callback': filter_disallowed_host_exception,
+        }
+    },
+    'handlers': {
+        # 'sentry': {
+        #     'level': 'ERROR',
+        #     'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+        # },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+            'filters': ['filter_disallowed_host_exception']
+        }
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'ERROR',
+            'handlers': ['console', ],
+            'propagate': False,
+        },
+        'raven': {
+            'level': 'DEBUG',
+            'handlers': ['console', ],
+            'propagate': False,
+        },
+        'sentry.errors': {
+            'level': 'DEBUG',
+            'handlers': ['console', ],
+            'propagate': False,
+        },
+        'django.security.DisallowedHost': {
+            'level': 'ERROR',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+    },
+}
+
+
+
