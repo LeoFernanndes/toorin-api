@@ -54,8 +54,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'drf_yasg',
 
-    'livros',
-    'pessoas',
+    'books',
+    'people',
 ]
 
 MIDDLEWARE = [
@@ -161,12 +161,13 @@ REST_FRAMEWORK = {
     ],
 }
 
-AUTH_USER_MODEL = "pessoas.User"
+AUTH_USER_MODEL = "people.User"
 
 
 disallowed_hosts_to_be_filtered = [
     'localhost'
 ]
+
 
 def filter_disallowed_host_exception(record):
     from random import random
@@ -179,12 +180,12 @@ def filter_disallowed_host_exception(record):
                 return False
     return True
 
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
     'root': {
         'level': 'WARNING',
-        # 'handlers': ['sentry', ],
         'handlers': ['console', ],
     },
     'formatters': {
@@ -200,10 +201,6 @@ LOGGING = {
         }
     },
     'handlers': {
-        # 'sentry': {
-        #     'level': 'ERROR',
-        #     'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        # },
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',

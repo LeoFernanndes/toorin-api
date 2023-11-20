@@ -20,7 +20,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
-from pessoas.views import CustomTokenObtainPairView
+from people.views import CustomTokenObtainPairView
 
 
 schema_view = get_schema_view(
@@ -42,8 +42,8 @@ urlpatterns = [
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('admin/', admin.site.urls),
-    path('livros/', include("livros.routes"), name='livros' ),
-    path('pessoas/', include("pessoas.routes"), name='pessoas' ),
+    path('books/', include("books.routes"), name='books'),
+    path('people/', include("people.routes"), name='people'),
     path('token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

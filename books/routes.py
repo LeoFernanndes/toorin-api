@@ -1,9 +1,9 @@
 from rest_framework import routers
 
-from livros.viewsets import LivrosViewSet
+from books.viewsets import BookViewSet
 
 router = routers.SimpleRouter()
-router.register(r"", LivrosViewSet, basename="livro")
+router.register(r"", BookViewSet, basename="book")
 
 urlpatterns = []
 urlpatterns += router.urls

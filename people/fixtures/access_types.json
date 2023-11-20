@@ -1,0 +1,23 @@
+[
+  {
+    "model": "people.accesstype",
+    "pk": 1,
+    "fields": {
+      "access_type": "super-user"
+    }
+  },
+  {
+    "model": "people.accesstype",
+    "pk": 2,
+    "fields": {
+      "access_type": "admin"
+    }
+  },
+  {
+    "model": "people.accesstype",
+    "pk": 3,
+    "fields": {
+      "access_type": "user"
+    }
+  }
+]

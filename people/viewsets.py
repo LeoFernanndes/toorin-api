@@ -1,9 +1,9 @@
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 
-from pessoas.models import User
-from pessoas.serializers import UserCreateSerializer, UserRetrieveSerializer, UserUpdateSerializer
-from pessoas.permissions import UserPermission
+from people.models import User
+from people.serializers import UserCreateSerializer, UserRetrieveSerializer, UserUpdateSerializer
+from people.permissions import UserPermission
 
 
 class UserViewSet(viewsets.ModelViewSet):

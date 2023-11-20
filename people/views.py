@@ -1,5 +1,5 @@
 from rest_framework_simplejwt.views import TokenObtainPairView
-from pessoas.serializers import CustomTokenObtainPairSerializer
+from people.serializers import CustomTokenObtainPairSerializer
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
