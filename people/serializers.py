@@ -3,6 +3,7 @@ import traceback
 from rest_framework import serializers
 from rest_framework.serializers import raise_errors_on_nested_writes
 from rest_framework.utils import model_meta
+from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from people.models import User
 
@@ -24,9 +25,23 @@ class UserRetrieveSerializer(UserSerializer):
 
 
 class UserCreateSerializer(UserSerializer):
+    email = serializers.EmailField(
+        validators=[UniqueValidator(queryset=User.objects.all())]
+    )
+    password_confirmation = serializers.CharField(allow_null=False, allow_blank=False, max_length=128)
+
     class Meta:
         model = User
-        fields = ['username', 'email', 'password', 'first_name', 'last_name']
+        fields = ['username', 'email', 'password', 'password_confirmation', 'first_name', 'last_name']
+
+    def validate_email(self, email):
+        #TODO: create a common to validate emails
+        return email
+
+    def validate_password(self, password):
+        if not password == self.password_confirmation:
+            raise serializers.ValidationError('Passwords must match')
+        return password
 
     def to_representation(self, instance):
         return UserRetrieveSerializer().to_representation(instance)

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
+from django.utils.translation import gettext_lazy as _
 
 
 class AccessType(models.Model):
@@ -8,7 +9,7 @@ class AccessType(models.Model):
 
 class ToorinUserManager(UserManager):
     def create(self, username, email=None, password=None, **extra_fields):
-        super().create_user(username, email, password, **extra_fields)
+        return super().create_user(username, email, password, **extra_fields)
 
     def create_superuser(self, username, email=None, password=None, **extra_fields):
         user = super().create_superuser(username, email, password, **extra_fields)
@@ -19,4 +20,5 @@ class ToorinUserManager(UserManager):
 
 class User(AbstractUser):
     access_type = models.ForeignKey(AccessType, on_delete=models.PROTECT, default=3)
+    email = models.EmailField(_('email address'), unique=True)
     objects = ToorinUserManager()
