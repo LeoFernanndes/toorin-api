@@ -1,10 +1,7 @@
-
-import traceback
 from rest_framework import serializers
-from rest_framework.serializers import raise_errors_on_nested_writes
-from rest_framework.utils import model_meta
 from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 from people.models import User
 
 
@@ -28,20 +25,14 @@ class UserCreateSerializer(UserSerializer):
     email = serializers.EmailField(
         validators=[UniqueValidator(queryset=User.objects.all())]
     )
-    password_confirmation = serializers.CharField(allow_null=False, allow_blank=False, max_length=128)
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password', 'password_confirmation', 'first_name', 'last_name']
+        fields = ['username', 'email', 'password', 'first_name', 'last_name']
 
     def validate_email(self, email):
         #TODO: create a common to validate emails
         return email
-
-    def validate_password(self, password):
-        if not password == self.password_confirmation:
-            raise serializers.ValidationError('Passwords must match')
-        return password
 
     def to_representation(self, instance):
         return UserRetrieveSerializer().to_representation(instance)
@@ -61,3 +52,54 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         user_data = UserRetrieveSerializer().to_representation(self.user)
         data.update({"user": user_data})
         return data
+
+
+class ChangeUserPasswordSerializer(serializers.ModelSerializer):
+    old_password = serializers.CharField(required=True, allow_null=False, allow_blank=False, max_length=128)
+    new_password = serializers.CharField(required=True, allow_null=False, allow_blank=False, max_length=128)
+
+    class Meta:
+        model = User
+        fields = ['old_password', 'new_password']
+
+    def validate_old_password(self, old_password):
+        if not self.instance.check_password(old_password):
+            raise serializers.ValidationError('Current password is incorrect')
+        return old_password
+
+    def validate_new_password(self, new_password):
+        # implement some  business rules for password validation 
+        return new_password
+
+    def save(self, **kwargs):
+        # reimplements .save() with minimal changes to set new password 
+        assert hasattr(self, '_errors'), (
+            'You must call `.is_valid()` before calling `.save()`.'
+        )
+
+        assert not self.errors, (
+            'You cannot call `.save()` on a serializer with invalid data.'
+        )
+
+        # Guard against incorrect use of `serializer.save(commit=False)`
+        assert 'commit' not in kwargs, (
+            "'commit' is not a valid keyword argument to the 'save()' method. "
+            "If you need to access data before committing to the database then "
+            "inspect 'serializer.validated_data' instead. "
+            "You can also pass additional keyword arguments to 'save()' if you "
+            "need to set extra attributes on the saved model instance. "
+            "For example: 'serializer.save(owner=request.user)'.'"
+        )
+
+        assert not hasattr(self, '_data'), (
+            "You cannot call `.save()` after accessing `serializer.data`."
+            "If you need to access data before committing to the database then "
+            "inspect 'serializer.validated_data' instead. "
+        )
+
+        validated_data = {**self.validated_data, **kwargs}
+        self.instance.set_password(validated_data['new_password'])
+        return self.instance
+
+    def to_representation(self, instance):
+        return {'detail': 'Successfuly changed password'}
