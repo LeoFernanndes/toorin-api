@@ -24,7 +24,7 @@ Bookstore management api implemented with django rest framework
     python manage.py runserver 0.0.0.0:8000
 
 ## Environment variables
-Create a .env file inside clone repository
+Create a .env file inside clone repository\
     DB_NAME=toorin\
     DB_USER=admin\
     DB_PASSWORD=password\

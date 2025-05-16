@@ -24,7 +24,7 @@ Api para gestão de uma livraria implementada em django rest framework
     python manage.py runserver 0.0.0.0:8000
 
 ## Variáveis de ambiente
-Crie um arquivo .env dentro do repositório clonado
+Crie um arquivo .env dentro do repositório clonado\
     DB_NAME=toorin\
     DB_USER=admin\
     DB_PASSWORD=password\
