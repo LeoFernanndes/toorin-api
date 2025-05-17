@@ -3,6 +3,7 @@ from rest_framework.generics import GenericAPIView
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from people.models import User
+from people.permissions import UpdateSelfUserPasswordPermission
 from people.serializers import CustomTokenObtainPairSerializer, ChangeUserPasswordSerializer
 
 
@@ -14,6 +15,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 class ChangeUserPasswordView(mixins.UpdateModelMixin, GenericAPIView):
     queryset = User.objects.all()
     serializer_class = ChangeUserPasswordSerializer
+    permission_classes = (UpdateSelfUserPasswordPermission, )
 
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)

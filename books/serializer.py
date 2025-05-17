@@ -9,8 +9,8 @@ class BookSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         books_list = self.Meta.model.objects.filter(
-            titulo=data['title'], isbm=data["isbm"], autor=data["author"], editora=data["publisher"],
-            edicao=data["edition"], num_paginas=data["pages"], descricao=data["description"]
+            title=data['title'], isbm=data["isbm"], author=data["author"], publisher=data["publisher"],
+            edition=data["edition"], pages=data["pages"], description=data["description"]
         )
         if books_list.count() > 0:
             raise serializers.ValidationError("Book already present on the database")        

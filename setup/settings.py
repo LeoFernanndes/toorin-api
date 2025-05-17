@@ -183,7 +183,7 @@ def filter_disallowed_host_exception(record):
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
     'root': {
         'level': 'WARNING',
         'handlers': ['console', ],
