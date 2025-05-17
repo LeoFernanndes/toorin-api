@@ -99,6 +99,7 @@ class ChangeUserPasswordSerializer(serializers.ModelSerializer):
 
         validated_data = {**self.validated_data, **kwargs}
         self.instance.set_password(validated_data['new_password'])
+        self.instance.save()
         return self.instance
 
     def to_representation(self, instance):
