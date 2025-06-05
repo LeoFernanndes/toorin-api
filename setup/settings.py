@@ -10,9 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+
 from pathlib import Path
-from decouple import config
 from datetime import timedelta
+
+from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -104,6 +106,13 @@ DATABASES = {
         "PASSWORD": config("DB_PASSWORD"),
         "HOST": config("DB_HOST"),
         "PORT": config("DB_PORT"),
+    }
+}
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
     }
 }
 
