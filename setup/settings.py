@@ -210,7 +210,12 @@ LOGGING = {
     },
     'loggers': {
         'django.db.backends': {
-            'level': 'ERROR',
+            'level': 'DEBUG',
+            'handlers': ['console', ],
+            'propagate': False,
+        },
+        'django.request': {
+            'level': 'DEBUG',
             'handlers': ['console', ],
             'propagate': False,
         },
